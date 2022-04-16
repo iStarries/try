@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N = 110;
+int n, m, total;
+string ss[N];
+
+int dx[8] = {0,0,1,-1,1,1,-1,-1}, dy[8] = {1,-1,0,0,1,-1,1,-1};
+
+void dfs(int x, int y)
+//change this W and all W around if
+{
+    ss[x][y] = '.';
+    for(int i=0; i<8; i++)
+    {
+        int a = x+dx[i], b = y+dy[i];
+        if(a>=0 && a<m && b>=0 && b<n && ss[a][b]=='W') dfs(a, b);
+    }
+}
+
+int main()
+{   
+
+    cin >> m >> n;
+    for(int i=0; i<m; i++)
+        cin >> ss[i];
+
+    for(int i=0; i<m; i++)
+        for(int j=0; j<n; j++){
+            if(ss[i][j]=='W')
+            //find W
+            {
+                dfs(i, j);
+                total++;
+            }
+        }
+
+    cout << total;
+
+    system("pause");
+    return 0;
+}
